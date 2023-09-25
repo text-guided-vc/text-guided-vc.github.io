@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.88.1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" href=""https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css"> -->
+	<link rel="stylesheet" href="../css/custom.css">
+	<link rel="stylesheet" href="../css/normalize.css">
+
+	<title>Toward General-Purpose Text-Instruction-Guided Voice Conversion</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1091.0" data-gr-ext-installed="">
+
+<div class="container" >
+<header role="banner">
+</header>
+<main role="main">
+<article itemscope itemtype="https://schema.org/BlogPosting">
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<div class="text-center">
+	<h1>Demonstrations For Our Dataset</h1>
+        <h3>Toward General-Purpose Text-Instruction-Guided Voice Conversion</h3>
+				<!-- Paper: <a href="https://arxiv.org/abs/2301.02111">https://arxiv.org/abs/2301.02111</a> -->
+	</div>
+	<!-- <p>
+        <b>Abstract.</b> 
+		This paper introduces a novel voice conversion (VC) model. It utilizes text instructions as style prompts to modify the prosody and emotional information of given speech. 
+    </p> -->
+
+		<br>
+		<h6>Demo for Our Results:  <a href="https://text-guided-vc.github.io/demo">Here</a> <br></h6>
+		<!-- This webpage's template is referenced from <a href="https://lifeiteng.github.io/valle/index.html">here</a> -->
+		<!-- backup demo page: <a href="https://creative-nation-96b.notion.site/BackUp-Demo-WebPages-d0da49d9782a45c0bd7780b41a6ecc06?pvs=4">Notion Link</a> -->
+		<br>
+
+		<!-- <br>
+		my implementation: <a href="https://github.com/lifeiteng/vall-e">https://github.com/lifeiteng/vall-e</a>
+		<br><br>
+		This page is for showing reproduced results only, I keep the main parts of the official demo.
+		<br><br> -->
+
+		<!-- <h2 id="model-configs" style="text-align: center;">Model Configs</h2>
+			<div class="table-responsive pt-3">
+				<table class="table table-hover pt-2">
+				<thead>
+				<tr>
+				<th style="text-align: center">Item</th>
+				<th style="text-align: center">The Paper</th>
+				<th style="text-align: center">LJSpeech Model</th>
+				<th style="text-align: center">LibriTTS Model</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr><td style="text-align: center; width: 140px"><b>Transformer</b></td>
+				<td style="text-align: center; width: 140px"><b>Dim 1024 Heads 16 Layers 12</b></td>
+				<td style="text-align: center; width: 140px"><b>Dim 256 Heads 8 Layers 6</b></td>
+				<td style="text-align: center; width: 140px"><b>Dim 1024 Heads 16 Layers 12</b></td>
+				</tr>
+				<tr>
+				<td style="text-align: center; width: 140px"><b>Dataset</b></td>
+				<td style="text-align: center; width: 140px"><b>LibriLight 60K hours</b></td>
+				<td style="text-align: center; width: 140px"><b>LJSpeech 20 hours</b></td>
+				<td style="text-align: center; width: 140px"><b>LibriTTS 0.56K hours</b></td>
+				</tr>
+				<tr>
+				<td style="text-align: center; width: 140px"><b>Machines</b></td>
+				<td style="text-align: center; width: 140px"><b>16 x V100 32GB GPU</b></td>
+				<td style="text-align: center; width: 140px"><b>1 x RTX 12GB GPU</b></td>
+				<td style="text-align: center; width: 140px"><b>1 x RTX 24GB GPU</b></td>
+				</tr>
+				</tbody>
+				</table>
+			</div> -->
+
+</div>
+
+<!-- <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">		
+	<h2 id="model-overview" style="text-align: center;">Model Overview</h2>
+	<body>
+	<p style="text-align: center;">
+		<img src="../overview_architecture.png" height="450" width="700">
+	</p>
+	</body>
+		<p>
+		The overview of our framework. Conditioned on the given textual instruction and source speech, our model is able to generate sequences of discrete audio codes, which can be decompressed to the waveform of target speech.
+		</p>
+</div> -->
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="Signal Procssing Effect Dataset" style="text-align: center;">Signal Procssing Effect Dataset</h2>
+		<div class="table-responsive pt-3">
+			Note: <br> <br>
+			(1) You can refer to the documentation page of <a href="https://sox.sourceforge.net/sox.html">Sox</a> for the more detailed introduction and explanation of the commands. <br> <br>
+			(2) In Sox commands, "src.wav" represents the source speech, while "tgt.wav" stands for the target speech. <br> <br>
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+			<th style="text-align: center" style="width: 200px">Sox Command</th>
+			<th style="text-align: center" style="width: 200px">Instruction</th>
+			<th style="text-align: center" style="width: 200px">Source Speech</th>
+			<th style="text-align: center" style="width: 200px">Target Speech</th>
+			
+			</tr>
+			</thead>
+			<tbody>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">sox -G src.wav tgt.wav <b>chorus</b> 0.7 0.9 55 0.4 0.25 2 -t</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Add a conspicuous chorus effect to the audio.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000007.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000007.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>delay</b> 1</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Hold off on playing the audio for 1 second.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000004.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000004.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>echo</b> 0.9 0.9 10 0.8</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Add an audio effect that generates a low-delay echo and high-volume sound.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_001355.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_001355.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>fade</b> t 5</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Give the audio a gradual increase in volume for 5 seconds from the onset.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000006.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000006.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>loudness</b> 10</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Increase the volume of the audio and enhance its impact.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000080.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000080.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>repeat</b> 1</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Play the audio twice.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000000.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>reverb</b></td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Enlarge the scope and widen the reach of the sound quality.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000011.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000011.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>tempo</b> 1.75</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Speed up the audio to a significant degree.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000029.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000029.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>vol</b> 1.5</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Boost the volume of the audio for maximum audibility.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000037.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000037.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>pitch</b> -250</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Drop the pitch of the audio down to an extreme degree.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_001889.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_001889.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>contrast</b> 100</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Amplifying the sound to deliver a clearer and brighter rendition.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000012.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000012.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>reverse</b></td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Backtrack the sound.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000013.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000013.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>bass</b> -20</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Considerably abate the bass frequencies.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000002.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>bass</b> 20</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Enlarge the depth of the lower frequencies significantly.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000014.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000014.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>treble</b> -6</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Mildly decrease the emphasis on the higher frequencies.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 100px">sox -G src.wav tgt.wav <b>treble</b> 20</td>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Intensify the sound of the higher frequencies.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/Sox/sox_gd_tgt_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			</tbody>
+			</table>
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="InstructSpeech Dataset" style="text-align: center;">InstructSpeech Dataset</h2>
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+			<!-- <th style="text-align: center" style="width: 200px">Emotion</th> -->
+			<th style="text-align: center" style="width: 200px">Instruction</th>
+			<th style="text-align: center" style="width: 200px">Source Speech</th>
+			<th style="text-align: center" style="width: 200px">Target Speech</th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<tr>
+			<!-- <td style="text-align: left;vertical-align:middle;width: 50px">whispering</td> -->
+			<td style="text-align: left;vertical-align:middle;width: 450px">Women bass and quiet, she grunts that.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_002521.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_002521.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">A boy with a low tone and volume and a high rate, he is murmuring.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_002715.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_002715.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Please generate a slow and gaily female sound.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_003001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_003001.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">The womanlike voice is raspy but small use this kind of voice to say with happy-go-lucky.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_003024.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_003024.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">The amused feminine raised his tone of voice and volume at the same time.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_003160.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_003160.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">A heart-broken woman who speaks slowly, with normal volume and low pitch.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_003884.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_003884.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">A quiet and sad low pitched female voice reminder.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_003928.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_003928.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Give me a bass boy with fast speech speed and small volume to bark.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_004156.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_004156.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Please give a baritone for me to outshout and turn its intensity down.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_src_0_003850.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 250px;"><source src="../dataset_demo_audio/promptTTS/promptTTS_gd_tgt_0_003850.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			</tr>
+
+			</tbody>
+
+			</table>
+		</div>
+
+
+</div>
+
+This webpage's template is referenced from <a href="https://lifeiteng.github.io/valle/index.html">here</a>
+
+</article>
+</main>
+</div>
+
+</body>
+</html>
