@@ -11,6 +11,11 @@
 	<link rel="stylesheet" href="../css/normalize.css">
 
 	<title>Toward General-Purpose Text-Instruction-Guided Voice Conversion</title>
+	<style>
+		* {
+			font-family: Verdana !important;
+		}
+	</style>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -25,14 +30,19 @@
 
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
 	<div class="text-center">
-	<h1>Toward General-Purpose Text-Instruction-Guided Voice Conversion</h1>
-		<h4>[Paper]</h4>
-		<h4>[Name]</h4>
+	<h1 style="font-family: Verdana;"><b>Toward General-Purpose Text-Instruction-Guided Voice Conversion</b></h1>
+	<h5>Chun-Yi Kuan<sup>1</sup>, Chen An Li<sup>1</sup>, Tsu-Yuan Hsu<sup>1</sup>, Tse-Yang Lin<sup>1</sup>, Ho-Lam Chung<sup>1</sup></h5>
+	<h5>Kai-Wei Chang<sup>1</sup>, Shuo-yiin Chang<sup>2</sup>, Hung-yi Lee<sup>1</sup></h5>
+	<h5><sup>1</sup>National Taiwan University, Taiwan</h5>
+	<h5><sup>2</sup>Google, USA</h5>	
+		<h5 style="font-family: Verdana;"><a href="https://arxiv.org/abs/2309.14324">[Paper on ArXiv]</a>
+			<!-- <a href="https://arxiv.org/abs/2309.14324">[Code on GitHub]</a> -->
+		</h5>
         <!-- <h3>Toward General-Purpose Text-Instruction-Guided Voice Conversion</h3> -->
 				<!-- Paper: <a href="https://arxiv.org/abs/2301.02111">https://arxiv.org/abs/2301.02111</a> -->
 	</div>
 	<p>
-        <h4><b>Abstract</b> <br></h4>
+        <h4 style="font-family: Verdana;"><b>Abstract</b> <br></h4>
 		This paper introduces a novel voice conversion (VC) model, guided by text instructions such as <b>articulate slowly with a deep tone</b> or <b>speak in a cheerful boyish voice</b>. 
 		Unlike traditional methods that rely on reference utterances to determine the attributes of the converted speech, using text instruction adds versatility and specificity to voice conversion. 
 		The proposed VC model is a neural codec language model which processes a sequence of discrete codes, resulting in the code sequence of converted speech.  
@@ -154,7 +164,7 @@
 			<td style="text-align: left;vertical-align:middle;width: 450px">Speak as if you’re telling a bedtime story to a child.</td>
 			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_ablation/src_0_002553.wav" autoplay/>Your browser does not support the audio element.</audio></td>
 			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_ablation/vc_0_002553_33.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_ablation/vc_0_002553_no3_diffusion.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_ablation/vc_0_002553_diffusion.wav" autoplay/>Your browser does not support the audio element.</audio></td>
 			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
 			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
 			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
@@ -481,8 +491,83 @@
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
 	<h2 id="Analysis of Adverbial Modifiers (I)" style="text-align: center;">Analysis of Adverbial Modifiers (I)</h2>
 		<h6>Default: Adopt the original decoder of EnCodec to convert codec to speech.</h6>
+		<h6>Model Configurations: Text-Scratch</h6>
+		<h6>EnCodec Decoder: Adopt the original decoder of EnCodec to convert codec to speech.</h6>
+		<h6>Diffusion Decoder: Utilize the multi-band diffusion model [1] to convert codec to speech.</h6>
+		<h8>[1] From Discrete Tokens to High-Fidelity Audio Using Multi-Band Diffusion <a href="https://arxiv.org/abs/2308.02560">[ArXiv]</a></h8>
 		<div class="table-responsive pt-3">
 			<table class="table table-hover pt-2">
+			<thead>
+			<tr>
+			<th style="text-align: center" style="width: 200px">Instruction</th>
+			<th style="text-align: center" style="width: 170px">Source Speech</th>
+			<!-- <th style="text-align: center" style="width: 200px">Target Speech <br> (Text-Text)</th>
+			<th style="text-align: center" style="width: 200px">Target Speech <br> (TTS-TTS)</th> -->
+			<th style="text-align: center" style="width: 170px">Target Speech <br> (EnCodec Deocder)</th>
+			<th style="text-align: center" style="width: 170px">Target Speech <br> (Diffusion Decoder)</th>
+			</tr>
+			</thead>
+			<tbody>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech <b>slightly</b>.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/vc_000005_4_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/adverb1.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0185_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/vc_000005_4_5.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/adverb2.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech <b>notably</b>.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/vc_000005_4_1.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/adverb3.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			</tr>
+
+			<tr>
+			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech <b>extremely</b>.</td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/vc_000005_4_4.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/adverb4.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
+			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
+			</tr>
+
+
+			
+			</thead>
+			</tbody>
+			</table>
+		</div>
+</div>
+
+<div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
+	<h2 id="Analysis of Adverbial Modifiers (II)" style="text-align: center;">Analysis of Adverbial Modifiers (II)</h2>
+		<h6>Default: Adopt the original decoder of EnCodec to convert codec to speech.</h6>
+		<!-- <h6>Model Configurations: Text-Scratch</h6> -->
+		<!-- <h6>EnCodec Decoder: Adopt the original decoder of EnCodec to convert codec to speech.</h6>
+		<h6>Diffusion Decoder: Utilize the multi-band diffusion model [1] to convert codec to speech.</h6>
+		<h8>[1] From Discrete Tokens to High-Fidelity Audio Using Multi-Band Diffusion <a href="https://arxiv.org/abs/2308.02560">[ArXiv]</a></h8> -->
+		<div class="table-responsive pt-3">
+			<table class="table table-hover pt-2">
+
 			<thead>
 			<tr>
 			<th style="text-align: center" style="width: 200px">Instruction</th>
@@ -492,44 +577,6 @@
 			<th style="text-align: center" style="width: 200px">Target Speech <br> (Text-Scratch)</th>
 			</tr>
 			</thead>
-			<tbody>
-
-			<tr>
-			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech <b>slightly</b>.</td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/vc_000005_4_0.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0185_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			</tr>
-
-			<tr>
-			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech.</td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/vc_000005_4_5.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			</tr>
-
-			<tr>
-			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech <b>notably</b>.</td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/vc_000005_4_1.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			</tr>
-
-			<tr>
-			<td style="text-align: left;vertical-align:middle;width: 450px">Decrease the speed of the speech <b>extremely</b>.</td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/src_000005.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 200px;"><source src="../demo_audio/vc_000005_4_4.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06s.wav" autoplay/>Your browser does not support the audio element.</audio></td>
-			<td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="../demo_audio/06.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			<!-- <td style="text-align: center"><audio controls="controls" style="width: 170px;"><source src="audios/ljspeech/LJ049-0124_24K_prompted_libritts.wav" autoplay/>Your browser does not support the audio element.</audio></td> -->
-			</tr>
-
 
 			<thead>
 			<tr>
@@ -575,7 +622,7 @@
 </div>
 
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
-	<h2 id="Analysis of Adverbial Modifiers (II)" style="text-align: center;">Analysis of Adverbial Modifiers (II)</h2>
+	<h2 id="Analysis of Adverbial Modifiers (III)" style="text-align: center;">Analysis of Adverbial Modifiers (III)</h2>
 		<h6>Default: Adopt the original decoder of EnCodec to convert codec to speech.</h6>
 		<div class="table-responsive pt-3">
 			<table class="table table-hover pt-2">

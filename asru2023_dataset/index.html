@@ -10,6 +10,12 @@
 	<link rel="stylesheet" href="../css/custom.css">
 	<link rel="stylesheet" href="../css/normalize.css">
 
+	<style>
+		* {
+			font-family: Verdana !important;
+		}
+	</style>
+
 	<title>Toward General-Purpose Text-Instruction-Guided Voice Conversion</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,16 +31,35 @@
 
 <div class="container pt-5 mt-5 shadow p-5 mb-5 bg-white rounded">
 	<div class="text-center">
-	<h1>Demonstrations For Our Dataset</h1>
-        <h3>Toward General-Purpose Text-Instruction-Guided Voice Conversion</h3>
-				<!-- Paper: <a href="https://arxiv.org/abs/2301.02111">https://arxiv.org/abs/2301.02111</a> -->
+	<h1 style="font-family: Verdana;"><b>Toward General-Purpose Text-Instruction-Guided Voice Conversion</b></h1>
+	<h5>Chun-Yi Kuan<sup>1</sup>, Chen An Li<sup>1</sup>, Tsu-Yuan Hsu<sup>1</sup>, Tse-Yang Lin<sup>1</sup>, Ho-Lam Chung<sup>1</sup></h5>
+	<h5>Kai-Wei Chang<sup>1</sup>, Shuo-yiin Chang<sup>2</sup>, Hung-yi Lee<sup>1</sup></h5>
+	<h5><sup>1</sup>National Taiwan University, Taiwan</h5>
+	<h5><sup>2</sup>Google, USA</h5>
+	
+		<h5 style="font-family: Verdana;"><a href="https://arxiv.org/abs/2309.14324">[Paper on ArXiv]</a>
+				<!-- <a href="https://arxiv.org/abs/2309.14324">[Code on GitHub]</a> -->
+		</h5>
 	</div>
 	<!-- <p>
         <b>Abstract.</b> 
 		This paper introduces a novel voice conversion (VC) model. It utilizes text instructions as style prompts to modify the prosody and emotional information of given speech. 
     </p> -->
 
+	<p>
+        <h4 style="font-family: Verdana;"><b>Dataset</b> <br></h4>
+		In the realm of instruction-guided voice conversion, indispensable
+		data elements include source speech samples, instructions, and target speech samples. Source speech denotes the original, unmodified vocal expression, whereas target speech refers to the altered
+		vocal output post-stylistic adaptation guided by instructions. Recognizing a deficit of such datasets that incorporate text instruction,
+		we seek inspiration from the InstructSpeech dataset proposed by
+		PromptTTS [1] and assemble a bespoke dataset to meet our precise
+		requirements.
 		<br>
+		<br>
+		[1] PromptTTS: controllable text-to-speech with text descriptions 
+		<a href="https://arxiv.org/abs/2211.12171">[ArXiv]</a>
+    </p>
+	<br>
 		<h6>Demo for Our Results:  <a href="https://text-guided-vc.github.io/asru2023_demo">Here</a> <br></h6>
 		<!-- This webpage's template is referenced from <a href="https://lifeiteng.github.io/valle/index.html">here</a> -->
 		<!-- backup demo page: <a href="https://creative-nation-96b.notion.site/BackUp-Demo-WebPages-d0da49d9782a45c0bd7780b41a6ecc06?pvs=4">Notion Link</a> -->
